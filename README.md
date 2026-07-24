@@ -1,23 +1,77 @@
-Yo Mate!!
+<div align="center">
 
-<img width="1500" height="64" alt="white_run_8fps" src="https://github.com/user-attachments/assets/89aa93e6-06bc-4026-b1c5-8c8c4e8496ee" />
-<img width="1500" height="100" alt="brown_walk_8fps" src="https://github.com/user-attachments/assets/20a6a930-80a4-4d63-bb83-647f2e4cffb8" />
+# Abhishek A
 
-# 💫 About Me:
-I'm a student, 18 yr/o
+*"Dang!! Look who's here."*
 
+<img src="./assets/terminal.svg" width="100%">
 
-# 💻 Tech Stack:
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-# 📊 GitHub Stats:
-![](https://github-readme-stats.shion.dev/api?username=mrduhlol&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
-![](https://streak-stats.demolab.com/?user=mrduhlol&theme=dark&hide_border=false)<br/>
-![](https://github-readme-stats.shion.dev/api/top-langs/?username=mrduhlol&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
-
-### ✍️ Random Dev Quote
-![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=gruvbox)
+</div>
 
 ---
-[![](https://komarev.com/ghpvc/?username=mrduhlol&icon=10&color=5)](https://visitcount.itsvg.in)
 
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+## Tech Stack
+
+<p align="center">
+
+<img src="https://skillicons.dev/icons?i=python,typescript,javascript,react,tailwind,vite,cpp,git,github,vscode,linux,nodejs"/>
+
+</p>
+
+---
+
+## GitHub Stats
+
+<p align="center">
+
+<img height="170" src="https://github-readme-stats.vercel.app/api?username=mrduhlol&show_icons=true&theme=transparent&hide_border=true">
+
+<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mrduhlol&layout=compact&theme=transparent&hide_border=true">
+
+</p>
+
+---
+
+## Streak
+
+<p align="center">
+
+<img src="https://streak-stats.demolab.com?user=mrduhlol&theme=transparent&hide_border=true">
+
+</p>
+
+---
+
+## Trophies
+
+<p align="center">
+
+<img src="https://github-profile-trophy.vercel.app/?username=mrduhlol&theme=algolia&no-frame=true&row=1&column=6">
+
+</p>
+
+---
+
+## Activity Graph
+
+<p align="center">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=mrduhlol&theme=github-compact&hide_border=true">
+
+</p>
+
+---
+
+## Snake
+
+<p align="center">
+
+<picture>
+<source media="(prefers-color-scheme: dark)"
+srcset="https://raw.githubusercontent.com/mrduhlol/mrduhlol/output/github-contribution-grid-snake-dark.svg">
+
+<img src="https://raw.githubusercontent.com/mrduhlol/mrduhlol/output/github-contribution-grid-snake.svg">
+
+</picture>
+
+</p>
