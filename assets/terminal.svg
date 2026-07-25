@@ -38,7 +38,7 @@ text {
 <text x="360" y="320">2</text>
 
 <text x="40" y="360" class="orange">Commits:</text>
-<text x="360" y="360">110</text>
+<text x="360" y="360">113</text>
 
 <text x="40" y="400" class="orange">Lines of Code:</text>
 <text x="360" y="400">0</text>
