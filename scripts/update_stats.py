@@ -1,87 +1,94 @@
-from github import Github
+"""Render the terminal header with the current public GitHub profile totals."""
+
+from __future__ import annotations
+
+import json
 import os
+import re
+from pathlib import Path
+from urllib.error import HTTPError
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 
-USERNAME = os.getenv("USERNAME")
-TOKEN = os.getenv("GITHUB_TOKEN")
 
-g = Github(TOKEN)
-user = g.get_user(USERNAME)
+USERNAME = os.environ["USERNAME"]
+TOKEN = os.environ["GITHUB_TOKEN"]
+API_URL = "https://api.github.com"
 
-repos = list(user.get_repos())
 
-repo_count = len(repos)
-followers = user.followers
+def github_request(path: str) -> tuple[object, str]:
+    """Return a GitHub REST response body and its Link header."""
+    request = Request(
+        f"{API_URL}{path}",
+        headers={
+            "Accept": "application/vnd.github+json",
+            "Authorization": f"Bearer {TOKEN}",
+            "User-Agent": "mrduhlol-profile-readme",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+    with urlopen(request, timeout=30) as response:
+        return json.load(response), response.headers.get("Link", "")
 
-stars = 0
-commits = 0
-loc = 0
 
-for repo in repos:
+def paginated(path: str) -> list[dict[str, object]]:
+    """Fetch every page from a GitHub list endpoint."""
+    items: list[dict[str, object]] = []
+    page = 1
+    while True:
+        response, _ = github_request(f"{path}{'&' if '?' in path else '?'}per_page=100&page={page}")
+        current_page = response if isinstance(response, list) else []
+        items.extend(item for item in current_page if isinstance(item, dict))
+        if len(current_page) < 100:
+            return items
+        page += 1
+
+
+def commit_count(repository: str) -> int:
+    """Read the count from GitHub's pagination metadata without downloading commits."""
     try:
-        stars += repo.stargazers_count
+        _, link_header = github_request(f"/repos/{USERNAME}/{quote(repository)}/commits?per_page=1")
+    except HTTPError as error:
+        # Empty repositories return 409 from this endpoint.
+        if error.code == 409:
+            return 0
+        raise
 
-        commits += repo.get_commits().totalCount
+    match = re.search(r"[?&]page=(\d+)>; rel=\"last\"", link_header)
+    return int(match.group(1)) if match else 1
 
-        try:
-            languages = repo.get_languages()
-            loc += sum(languages.values())
-        except:
-            pass
 
-    except:
-        pass
+def main() -> None:
+    profile, _ = github_request(f"/users/{quote(USERNAME)}")
+    repositories = paginated(f"/users/{quote(USERNAME)}/repos?type=owner&sort=updated")
 
-template = f"""
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
-<style>
-text {{
-    font-family: "JetBrains Mono", monospace;
-    font-size: 20px;
-    fill: #d6d6d6;
-}}
-.title {{
-    fill: #ffffff;
-    font-size: 26px;
-}}
-.orange {{
-    fill: #f4a261;
-}}
-</style>
+    stars = 0
+    commits = 0
+    loc = 0
+    for repository in repositories:
+        stars += int(repository.get("stargazers_count", 0))
+        name = str(repository["name"])
+        commits += commit_count(name)
+        languages, _ = github_request(f"/repos/{USERNAME}/{quote(name)}/languages")
+        if isinstance(languages, dict):
+            loc += sum(int(bytes_of_code) for bytes_of_code in languages.values())
 
-<rect width="100%" height="100%" rx="20" fill="#161b22"/>
+    template_path = Path("assets/terminal.svg.j2")
+    output_path = Path("assets/terminal.svg")
+    svg = template_path.read_text(encoding="utf-8")
+    values = {
+        "repos": len(repositories),
+        "stars": stars,
+        "followers": int(profile["followers"]),
+        "commits": commits,
+        "loc": f"{loc:,}",
+    }
+    for key, value in values.items():
+        svg = svg.replace(f"{{{{ {key} }}}}", str(value))
 
-<text x="40" y="50" class="title">{USERNAME}@github</text>
+    output_path.write_text(svg, encoding="utf-8", newline="\n")
+    print("Generated assets/terminal.svg")
 
-<text x="40" y="100" class="orange">OS:</text>
-<text x="260" y="100">Windows 11, Linux</text>
 
-<text x="40" y="140" class="orange">Role:</text>
-<text x="260" y="140">AI Developer</text>
-
-<text x="40" y="180" class="orange">IDE:</text>
-<text x="260" y="180">VS Code</text>
-
-<text x="40" y="240" class="orange">Repositories:</text>
-<text x="360" y="240">{repo_count}</text>
-
-<text x="40" y="280" class="orange">Stars:</text>
-<text x="360" y="280">{stars}</text>
-
-<text x="40" y="320" class="orange">Followers:</text>
-<text x="360" y="320">{followers}</text>
-
-<text x="40" y="360" class="orange">Commits:</text>
-<text x="360" y="360">{commits}</text>
-
-<text x="40" y="400" class="orange">Lines of Code:</text>
-<text x="360" y="400">{loc:,}</text>
-
-</svg>
-"""
-
-os.makedirs("assets", exist_ok=True)
-
-with open("assets/terminal.svg", "w", encoding="utf-8") as f:
-    f.write(template)
-
-print("Generated assets/terminal.svg")
+if __name__ == "__main__":
+    main()
