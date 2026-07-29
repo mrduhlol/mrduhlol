@@ -44,15 +44,19 @@ def paginated(path: str) -> list[dict[str, object]]:
 
 
 def commit_count(repository: str) -> int:
-    """Read the count from GitHub's pagination metadata without downloading commits."""
+    """Count commits authored by this profile, rather than repository history."""
     try:
-        _, link_header = github_request(f"/repos/{USERNAME}/{quote(repository)}/commits?per_page=1")
+        response, link_header = github_request(
+            f"/repos/{USERNAME}/{quote(repository)}/commits?author={quote(USERNAME)}&per_page=1"
+        )
     except HTTPError as error:
         # Empty repositories return 409 from this endpoint.
         if error.code == 409:
             return 0
         raise
 
+    if not response:
+        return 0
     match = re.search(r"[?&]page=(\d+)>; rel=\"last\"", link_header)
     return int(match.group(1)) if match else 1
 
@@ -61,10 +65,11 @@ def main() -> None:
     profile, _ = github_request(f"/users/{quote(USERNAME)}")
     repositories = paginated(f"/users/{quote(USERNAME)}/repos?type=owner&sort=updated")
 
+    original_repositories = [repository for repository in repositories if not repository.get("fork", False)]
     stars = 0
     commits = 0
     loc = 0
-    for repository in repositories:
+    for repository in original_repositories:
         stars += int(repository.get("stargazers_count", 0))
         name = str(repository["name"])
         commits += commit_count(name)
@@ -76,7 +81,8 @@ def main() -> None:
     output_path = Path("assets/terminal.svg")
     svg = template_path.read_text(encoding="utf-8")
     values = {
-        "repos": len(repositories),
+        # Match the public repository count shown on the GitHub profile itself.
+        "repos": int(profile["public_repos"]),
         "stars": stars,
         "followers": int(profile["followers"]),
         "commits": commits,
