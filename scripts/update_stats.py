@@ -11,22 +11,21 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
-USERNAME = os.environ["USERNAME"]
-TOKEN = os.environ["GITHUB_TOKEN"]
+USERNAME = os.getenv("USERNAME", "mrduhlol")
+TOKEN = os.getenv("GITHUB_TOKEN")
 API_URL = "https://api.github.com"
 
 
 def github_request(path: str) -> tuple[object, str]:
     """Return a GitHub REST response body and its Link header."""
-    request = Request(
-        f"{API_URL}{path}",
-        headers={
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"Bearer {TOKEN}",
-            "User-Agent": "mrduhlol-profile-readme",
-            "X-GitHub-Api-Version": "2022-11-28",
-        },
-    )
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "mrduhlol-profile-readme",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    if TOKEN:
+        headers["Authorization"] = f"Bearer {TOKEN}"
+    request = Request(f"{API_URL}{path}", headers=headers)
     with urlopen(request, timeout=30) as response:
         return json.load(response), response.headers.get("Link", "")
 

@@ -1,46 +1,24 @@
-
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
-<style>
-text {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 20px;
-    fill: #d6d6d6;
-}
-.title {
-    fill: #ffffff;
-    font-size: 26px;
-}
-.orange {
-    fill: #f4a261;
-}
-</style>
-
-<rect width="100%" height="100%" rx="20" fill="#161b22"/>
-
-<text x="40" y="50" class="title">mrduhlol@github</text>
-
-<text x="40" y="100" class="orange">OS:</text>
-<text x="260" y="100">Windows 11, Linux</text>
-
-<text x="40" y="140" class="orange">Role:</text>
-<text x="260" y="140">AI Developer</text>
-
-<text x="40" y="180" class="orange">IDE:</text>
-<text x="260" y="180">VS Code</text>
-
-<text x="40" y="240" class="orange">Repositories:</text>
-<text x="360" y="240">10</text>
-
-<text x="40" y="280" class="orange">Stars:</text>
-<text x="360" y="280">9</text>
-
-<text x="40" y="320" class="orange">Followers:</text>
-<text x="360" y="320">3</text>
-
-<text x="40" y="360" class="orange">Commits:</text>
-<text x="360" y="360">119</text>
-
-<text x="40" y="400" class="orange">Lines of Code:</text>
-<text x="360" y="400">0</text>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title description">
+  <title id="title">mrduhlol terminal profile</title>
+  <desc id="description">Neofetch-style GitHub profile details and live GitHub statistics.</desc>
+  <style>
+    text { font-family: "JetBrains Mono", "Cascadia Code", "SFMono-Regular", Consolas, monospace; font-size: 20px; font-weight: 500; }
+    .heading { fill: #c9d1d9; } .label { fill: #e3a05b; } .value { fill: #9ecbff; } .dots { fill: #8b949e; }
+  </style>
+  <text x="24" y="34" class="heading">mrduhlol@github ────────────────────────────────────────────</text>
+  <text x="24" y="66"><tspan class="dots">· </tspan><tspan class="label">Student:</tspan><tspan class="dots"> ................. </tspan><tspan class="value">AI Developer</tspan></text>
+  <text x="24" y="96"><tspan class="dots">· </tspan><tspan class="label">School:</tspan><tspan class="dots"> .................. </tspan><tspan class="value">Jawahar Navodaya Vidyalaya</tspan></text>
+  <text x="24" y="126"><tspan class="dots">· </tspan><tspan class="label">Education:</tspan><tspan class="dots"> ............... </tspan><tspan class="value">PCMC Student</tspan></text>
+  <text x="24" y="156"><tspan class="dots">· </tspan><tspan class="label">Editor:</tspan><tspan class="dots"> .................. </tspan><tspan class="value">VS Code, PyCharm</tspan></text>
+  <text x="24" y="206" class="heading">Languages ────────────────────────────────────────────────</text>
+  <text x="24" y="238"><tspan class="dots">· </tspan><tspan class="label">Languages.Programming:</tspan><tspan class="dots"> .. </tspan><tspan class="value">Python, TypeScript, JavaScript, C++</tspan></text>
+  <text x="24" y="268"><tspan class="dots">· </tspan><tspan class="label">Languages.Web:</tspan><tspan class="dots"> ........... </tspan><tspan class="value">React, Tailwind CSS</tspan></text>
+  <text x="24" y="298"><tspan class="dots">· </tspan><tspan class="label">Languages.Focus:</tspan><tspan class="dots"> ......... </tspan><tspan class="value">AI/ML, Robotics, Backend Development</tspan></text>
+  <text x="24" y="348" class="heading">Contact ──────────────────────────────────────────────────</text>
+  <text x="24" y="380"><tspan class="dots">· </tspan><tspan class="label">Email:</tspan><tspan class="dots"> ................... </tspan><tspan class="value">abhishek.a2534@gmail.com</tspan></text>
+  <text x="24" y="430" class="heading">GitHub Stats ─────────────────────────────────────────────</text>
+  <text x="24" y="462"><tspan class="dots">· </tspan><tspan class="label">Repos:</tspan><tspan class="dots"> ..... </tspan><tspan class="value">23</tspan><tspan class="dots">   │   </tspan><tspan class="label">Stars:</tspan><tspan class="dots"> ........... </tspan><tspan class="value">2859</tspan></text>
+  <text x="24" y="492"><tspan class="dots">· </tspan><tspan class="label">Commits:</tspan><tspan class="dots"> ... </tspan><tspan class="value">35219</tspan><tspan class="dots">   │   </tspan><tspan class="label">Followers:</tspan><tspan class="dots"> ....... </tspan><tspan class="value">56</tspan></text>
+  <text x="24" y="522"><tspan class="dots">· </tspan><tspan class="label">GitHub LOC:</tspan><tspan class="dots"> ........... </tspan><tspan class="value">120,238,282</tspan></text>
 </svg>
