@@ -17,8 +17,6 @@
 
 <span style="color:#00ff88">interests:</span>
   - Cybersecurity
-  - Cloud Computing
-  - Linux
   - Software Development
 
 <span style="color:#00ff88">currently_learning:</span>
